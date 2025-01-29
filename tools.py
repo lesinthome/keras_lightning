@@ -4,7 +4,7 @@ import torch
 
 def compile(model, optimizer, loss, metrics, device="cpu"):
   class LightningModel(pl.LightningModule):
-    def __init__(self, model, optimizer, loss, metrics):
+    def __init__(self, model, optimizer, loss, metrics, device):
         super().__init__()
         self.model = model
         self.optimizer = optimizer
