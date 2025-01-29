@@ -13,7 +13,7 @@ def compile(model, optimizer, loss, metrics, gpu=False):
         self.metrics_name = []
         self.metrics_func = []
         for i in range(len(metrics)):
-            name, func = metrics[i].items()
+            name, func = list(metrics[i].items())[0]
             self.metrics_name.append(name)
             self.metrics_func.append(func)
 
@@ -42,7 +42,7 @@ def compile(model, optimizer, loss, metrics, gpu=False):
     def summary(self):
         return self.model.summary()
         
-  return LightningModel(model,optimizer,loss,metrics)
+  return LightningModel(model,optimizer,loss,metrics,gpu)
 
 
 def load(model,checkpoint_path):
