@@ -2,14 +2,14 @@ import pytorch_lightning as pl
 from keras import ops
 import torch
 
-def compile(model, optimizer, loss, metrics, dev="cpu"):
+def compile(model, optimizer, loss, metrics, gpu=False):
   class LightningModel(pl.LightningModule):
-    def __init__(self, model, optimizer, loss, metrics, dev):
+    def __init__(self, model, optimizer, loss, metrics, gpu):
         super().__init__()
         self.model = model
         self.optimizer = optimizer
         self.criterion = loss
-        self.device = device
+        self.dev = "cuda" if True else "cpu"
         self.metrics_name = []
         self.metrics_func = []
         for i in range(len(metrics)):
