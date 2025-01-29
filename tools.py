@@ -2,9 +2,9 @@ import pytorch_lightning as pl
 from keras import ops
 import torch
 
-def compile(model, optimizer, loss, metrics, device="cpu"):
+def compile(model, optimizer, loss, metrics, dev="cpu"):
   class LightningModel(pl.LightningModule):
-    def __init__(self, model, optimizer, loss, metrics, device):
+    def __init__(self, model, optimizer, loss, metrics, dev):
         super().__init__()
         self.model = model
         self.optimizer = optimizer
@@ -21,8 +21,8 @@ def compile(model, optimizer, loss, metrics, device="cpu"):
         return self.model(x)
 
     def prepare_input(self, x, y):
-        x = ops.convert_to_tensor(x).type(torch.LongTensor).to(self.device)
-        y = ops.convert_to_tensor(y).type(torch.LongTensor).to(self.device)
+        x = ops.convert_to_tensor(x).type(torch.LongTensor).to(self.dev)
+        y = ops.convert_to_tensor(y).type(torch.LongTensor).to(self.dev)
         return x, y
 
     def training_step(self, batch, batch_idx):
