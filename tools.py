@@ -47,5 +47,9 @@ def compile(model, optimizer, loss, metrics, gpu=False):
 
 def load(model,checkpoint_path):
   checkpoint = torch.load(checkpoint_path, weights_only=True)
-  model.model.load_state_dict(checkpoint['state_dict'])
-  return model
+  if 'keras' in str(type(model)):
+    print('Please compile Keras model with keras_lightning.tools.compile')
+    return None
+  elif 'Lightning' in str(type(model)):
+    model.load_state_dict(checkpoint['state_dict'])
+    return model
