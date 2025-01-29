@@ -9,7 +9,7 @@ def compile(model, optimizer, loss, metrics, gpu=False):
         self.model = model
         self.optimizer = optimizer
         self.criterion = loss
-        self.dev = "cuda" if True else "cpu"
+        self.dev = "cuda" if gpu else "cpu"
         self.metrics_name = []
         self.metrics_func = []
         for i in range(len(metrics)):
